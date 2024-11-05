@@ -25,21 +25,25 @@ void drawCloud(int x)
     txCircle(410, 160, 10);
 
 }
-void drawMan()
+
+void drawMan(int x, int y, int xLegs)
 {
+//x=680 y=440
     txSetColor (TX_BLACK);
     txSetFillColor (TX_WHITE);
-    txLine (660, 480, 680, 440);
-    txLine (680, 440, 705, 480);
-    txLine (680, 440, 680, 360);
-    txLine (690, 360, 660, 420);
-    txLine (670, 360, 700, 420);
-    txCircle (680, 360, 20);
+    txLine (x+660-680+xLegs, y+480-440, x+680-680, y+440-440);       //нога левая
+    txLine (x+680-680, y+440-440, x+705-680-xLegs, y+480-440);        //нога правая
+    txLine (x+680-680, y+440-440, x+680-680, y+360-440);
+    txLine (x+690-680, y+360-440, x+660-680, y+420-440);
+    txLine (x+670-680, y+360-440, x+700-680, y+420-440);
+    txCircle (x+680-680, y+360-440, 20);
     //лицо
-    txLine (688, 370, 672, 370);
+    txLine (x+688-680, y+370-440, x+672-680, y+370-440);
     txSetFillColor (TX_LIGHTBLUE);
-    txCircle (688, 358, 4);
-    txCircle (672, 358, 4);
+    txCircle (x+688-680, y+358-440, 4);
+    txCircle (x+672-680, y+358-440, 4);
+
+    txSleep(20);
 }
 void drawhouse()
 {
@@ -86,6 +90,13 @@ void drawSmoke(int x, int y)
     txSetColor (TX_WHITE);
     txSetFillColor (TX_WHITE);
     txEllipse(x+380-380, y+140-140, x+430-380, y+170-140);
+    txEllipse(x+400-380, y+150-140, x+450-380, y+180-140);
+    txEllipse(x+390-380, y+160-140, x+440-380, y+120-140);
+    txEllipse(x+310-380, y+110-140, x+190-380, y+190-140);
+    txEllipse(x+410-380, y+120-140, x+400-380, y+180-140);
+    txEllipse(x+370-380, y+170-140, x+250-380, y+100-140);
+    txEllipse(x+460-380, y+180-140, x+299-380, y+150-140);
+    txEllipse(x+310-380, y+190-140, x+410-380, y+110-140);
 }
 
 
@@ -99,6 +110,9 @@ txCreateWindow (800, 600);
     int xLuna = -150;
     int xSmoke = 380;
     int ySmoke = 140;
+    int xMan = 680;
+    int yMan = 440;
+    int xLegs = 0;
 
 
     while(xSun<1000)
@@ -109,16 +123,40 @@ txCreateWindow (800, 600);
         drawCloud(xCloud);
         drawTrava();
         drawhouse();
-
         drawSmoke(xSmoke, ySmoke);
-
-        drawMan();
+        drawMan(xMan, yMan, xLegs);
         txEnd();
-
-        xSun += 5;
+        if(ySmoke<-60)
+        {
+            xSmoke = 380;
+            ySmoke = 140;
+        }
+        xSun += 1;
         xCloud -= 10;
         xSmoke -= 2;
-        ySmoke -= 1;
+        ySmoke -= 3;
+        xLegs += 10;
+        txSleep(10);
+
+        txBegin();
+        drawSky(TX_LIGHTBLUE);
+        drawSun(xSun);
+        drawCloud(xCloud);
+        drawTrava();
+        drawhouse();
+        drawSmoke(xSmoke, ySmoke);
+        drawMan(xMan, yMan, xLegs);
+        txEnd();
+        if(ySmoke<-60)
+        {
+            xSmoke = 380;
+            ySmoke = 140;
+        }
+        xSun += 1;
+        xCloud -= 10;
+        xSmoke -= 2;
+        ySmoke -= 3;
+        xLegs -= 10;
         txSleep(10);
 
     }
@@ -129,7 +167,7 @@ txCreateWindow (800, 600);
         drawLuna(xLuna);
         drawTrava();
         drawhouse();
-        drawMan();
+        drawMan(xMan, yMan, xLegs);
         txEnd();
 
         xLuna += 5;
