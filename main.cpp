@@ -49,7 +49,7 @@ void drawhouse()
 {
     txSetColor (TX_WHITE);
     txSetFillColor (TX_BROWN);
-    //фронтвльная стена
+    //фронтальная стена
     txRectangle (100, 360, 360, 600);
     //боковая стена
     POINT stena[4] = {{360, 600}, {600, 420}, {600, 200}, {360, 360}};
@@ -99,6 +99,20 @@ void drawSmoke(int x, int y)
     txEllipse(x+310-380, y+190-140, x+410-380, y+110-140);
 }
 
+void drawText(int y)
+{
+     txSetColor (TX_WHITE);
+     txSelectFont ("Times New Roman", 45, 15, FW_BOLD, true, false, false, 0);
+     txDrawText (0, y, 800, y+500, "Анимационный мультфильм.");
+     txDrawText (0, y, 800, y+600, "Идущий в никуда.");
+     txDrawText (0, y, 800, y+650, "В главной роли- Какой-то непонятный человек.");
+}
+ void drawFonText()
+ {
+     txSetColor (TX_BLACK);
+     txSetFillColor (TX_BLACK);
+     txRectangle (0, 0, 800, 600);
+}
 
 int main()
 {
@@ -113,6 +127,17 @@ txCreateWindow (800, 600);
     int xMan = 680;
     int yMan = 440;
     int xLegs = 0;
+    int yText = 650;
+
+    while(yText > -400)
+{
+       txBegin();
+       drawFonText();
+       drawText(yText);
+       txEnd();
+       yText -= 5;
+       txSleep(10);
+ }
 
 
     while(xSun<1000)
@@ -125,6 +150,7 @@ txCreateWindow (800, 600);
         drawhouse();
         drawSmoke(xSmoke, ySmoke);
         drawMan(xMan, yMan, xLegs);
+        drawText(yText);
         txEnd();
         if(ySmoke<-60)
         {
@@ -136,7 +162,7 @@ txCreateWindow (800, 600);
         xSmoke -= 2;
         ySmoke -= 3;
         xLegs += 10;
-        txSleep(10);
+        txSleep(7);
 
         txBegin();
         drawSky(TX_LIGHTBLUE);
@@ -146,6 +172,7 @@ txCreateWindow (800, 600);
         drawhouse();
         drawSmoke(xSmoke, ySmoke);
         drawMan(xMan, yMan, xLegs);
+        drawText(yText);
         txEnd();
         if(ySmoke<-60)
         {
@@ -157,7 +184,7 @@ txCreateWindow (800, 600);
         xSmoke -= 2;
         ySmoke -= 3;
         xLegs -= 10;
-        txSleep(10);
+        txSleep(7);
 
     }
     while(xLuna<1000)
@@ -168,10 +195,11 @@ txCreateWindow (800, 600);
         drawTrava();
         drawhouse();
         drawMan(xMan, yMan, xLegs);
+        drawText(yText);
         txEnd();
 
         xLuna += 5;
-        txSleep(10);
+        txSleep(7);
     }
 
 txTextCursor (false);
