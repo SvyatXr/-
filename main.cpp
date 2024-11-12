@@ -99,13 +99,11 @@ void drawSmoke(int x, int y)
     txEllipse(x+310-380, y+190-140, x+410-380, y+110-140);
 }
 
-void drawText(int y)
+void drawText(int y, int sizeFont, const char* text)
 {
      txSetColor (TX_WHITE);
-     txSelectFont ("Times New Roman", 45, 15, FW_BOLD, true, false, false, 0);
-     txDrawText (0, y, 800, y+500, "Анимационный мультфильм.");
-     txDrawText (0, y, 800, y+600, "Идущий в никуда.");
-     txDrawText (0, y, 800, y+650, "В главной роли- Какой-то непонятный человек.");
+     txSelectFont ("Times New Roman", sizeFont, sizeFont/3, FW_BOLD, true, false, false, 0);
+     txDrawText (0, y, 800, y+500, text);
 }
  void drawFonText()
  {
@@ -129,11 +127,24 @@ txCreateWindow (800, 600);
     int xLegs = 0;
     int yText = 650;
 
+    txPlaySound ("уведомление.wav");
+    txPlaySound ("C:\\Windows\\Media\\tada.wav");
+
+
+
+
+
+
+
+
+
     while(yText > -400)
 {
        txBegin();
        drawFonText();
-       drawText(yText);
+       drawText(yText, 25, "Анимационный мультфильм.");
+       drawText(yText+100, 55, "Идущий в ни-----------куда:)");
+       drawText(yText+150, 20, "В главной роли- Какой-то непонятный человек.");
        txEnd();
        yText -= 5;
        txSleep(10);
@@ -150,7 +161,7 @@ txCreateWindow (800, 600);
         drawhouse();
         drawSmoke(xSmoke, ySmoke);
         drawMan(xMan, yMan, xLegs);
-        drawText(yText);
+        //drawText(yText, 20);
         txEnd();
         if(ySmoke<-60)
         {
@@ -172,7 +183,7 @@ txCreateWindow (800, 600);
         drawhouse();
         drawSmoke(xSmoke, ySmoke);
         drawMan(xMan, yMan, xLegs);
-        drawText(yText);
+        //drawText(yText, 20);
         txEnd();
         if(ySmoke<-60)
         {
@@ -195,13 +206,32 @@ txCreateWindow (800, 600);
         drawTrava();
         drawhouse();
         drawMan(xMan, yMan, xLegs);
-        drawText(yText);
+        //drawText(yText, 20);
         txEnd();
 
         xLuna += 5;
         txSleep(7);
     }
-
+    yText = 650;
+  while(yText > -400)
+{
+       txBegin();
+       drawFonText();
+       drawText(yText, 35, "Анимационный мультфильм.");
+       drawText(yText+70, 40, "Идущий в ни-----------куда:)");
+       drawText(yText+100, 40, "Снимались:");
+       drawText(yText+150, 25, "В  роли Дома- Дом Домов Домович.");
+       drawText(yText+170, 25, "В  роли Солнца- Солнце Солнцев Солнцевич.");
+       drawText(yText+190, 25, "В  роли Луны- Луна Лунова Луновна.");
+       drawText(yText+210, 25, "В  роли Травы- Трава Травова Травовна.");
+       drawText(yText+230, 25, "В  роли Облака - Облако Облаков Облаковович.");
+       drawText(yText+250, 25, "В  роли Дыма- Дым Дымов Дымович.");
+       drawText(yText+270, 25, "В  роли Текста- Текст Текстов Текстович.");
+       drawText(yText+290, 25, "В  роли Какого-то непонятного человека- Какой-то непонятный человек.");
+       txEnd();
+       yText -= 5;
+       txSleep(10);
+ }
 txTextCursor (false);
 return 0;
 }
