@@ -127,8 +127,8 @@ txCreateWindow (800, 600);
     int xLegs = 0;
     int yText = 650;
 
-    txPlaySound ("уведомление.wav");
-    txPlaySound ("C:\\Windows\\Media\\tada.wav");
+    txPlaySound ("star-wars-imperial-march.wav");
+
 
 
 
@@ -183,7 +183,6 @@ txCreateWindow (800, 600);
         drawhouse();
         drawSmoke(xSmoke, ySmoke);
         drawMan(xMan, yMan, xLegs);
-        //drawText(yText, 20);
         txEnd();
         if(ySmoke<-60)
         {
@@ -206,7 +205,6 @@ txCreateWindow (800, 600);
         drawTrava();
         drawhouse();
         drawMan(xMan, yMan, xLegs);
-        //drawText(yText, 20);
         txEnd();
 
         xLuna += 5;
@@ -228,6 +226,9 @@ txCreateWindow (800, 600);
        drawText(yText+250, 25, "В  роли Дыма- Дым Дымов Дымович.");
        drawText(yText+270, 25, "В  роли Текста- Текст Текстов Текстович.");
        drawText(yText+290, 25, "В  роли Какого-то непонятного человека- Какой-то непонятный человек.");
+       drawText(yText+310, 30, "/\ ");
+       drawText(yText+350, 30, "\/ ");
+
        txEnd();
        yText -= 5;
        txSleep(10);
