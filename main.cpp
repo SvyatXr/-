@@ -32,7 +32,7 @@ void drawMan(int x, int y, int xLegs)
     txSetColor (TX_BLACK);
     txSetFillColor (TX_WHITE);
     txLine (x+660-680+xLegs, y+480-440, x+680-680, y+440-440);       //нога левая
-    txLine (x+680-680, y+440-440, x+705-680-xLegs, y+480-440);        //нога правая
+    txLine (x+680-680, y+440-440, x+705-680-xLegs, y+480-440);       //нога правая
     txLine (x+680-680, y+440-440, x+680-680, y+360-440);
     txLine (x+690-680, y+360-440, x+660-680, y+420-440);
     txLine (x+670-680, y+360-440, x+700-680, y+420-440);
@@ -99,14 +99,26 @@ void drawSmoke(int x, int y)
     txEllipse(x+310-380, y+190-140, x+410-380, y+110-140);
 }
 
+void drawTree()
+{
+    txSetColor (TX_BROWN);
+    txSetFillColor (TX_BROWN);
+    txRectangle (540, 420, 560, 550);
+    txSetColor (TX_LIGHTGREEN);
+    txSetFillColor (TX_LIGHTGREEN);
+    txEllipse(500, 150, 600, 450);
+}
+
+
 void drawText(int y, int sizeFont, const char* text)
 {
      txSetColor (TX_WHITE);
      txSelectFont ("Times New Roman", sizeFont, sizeFont/3, FW_BOLD, true, false, false, 0);
      txDrawText (0, y, 800, y+500, text);
 }
- void drawFonText()
- {
+
+void drawFonText()
+{
      txSetColor (TX_BLACK);
      txSetFillColor (TX_BLACK);
      txRectangle (0, 0, 800, 600);
@@ -119,27 +131,20 @@ txCreateWindow (800, 600);
 
     int xSun = 100;
     int xCloud = 320;
-    int xLuna = -150;
-    int xSmoke = 380;
-    int ySmoke = 140;
     int xMan = 680;
     int yMan = 440;
     int xLegs = 0;
+    int xLuna = -150;
+    int xSmoke = 380;
+    int ySmoke = 140;
     int yText = 650;
 
     txPlaySound ("star-wars-imperial-march.wav");
 
 
 
-
-
-
-
-
-
-
     while(yText > -400)
-{
+    {
        txBegin();
        drawFonText();
        drawText(yText, 25, "Анимационный мультфильм.");
@@ -161,19 +166,20 @@ txCreateWindow (800, 600);
         drawhouse();
         drawSmoke(xSmoke, ySmoke);
         drawMan(xMan, yMan, xLegs);
-        //drawText(yText, 20);
+
         txEnd();
         if(ySmoke<-60)
         {
             xSmoke = 380;
             ySmoke = 140;
         }
-        xSun += 1;
+        xSun += 3;
         xCloud -= 10;
         xSmoke -= 2;
         ySmoke -= 3;
+        xMan += 0;
         xLegs += 10;
-        txSleep(7);
+        txSleep(5);
 
         txBegin();
         drawSky(TX_LIGHTBLUE);
@@ -189,14 +195,16 @@ txCreateWindow (800, 600);
             xSmoke = 380;
             ySmoke = 140;
         }
-        xSun += 1;
+        xSun += 3;
         xCloud -= 10;
         xSmoke -= 2;
         ySmoke -= 3;
+        xMan += 0;
         xLegs -= 10;
         txSleep(7);
 
     }
+
     while(xLuna<1000)
     {
         txBegin();
@@ -208,11 +216,35 @@ txCreateWindow (800, 600);
         txEnd();
 
         xLuna += 5;
+        xMan += 2;
+        yMan += 2;
         txSleep(7);
     }
+
+
+
+    xLuna = -150;
+    xMan = -20;
+    yMan = 375;
+    while(xLuna<1000)
+    {
+        txBegin();
+        drawSky(TX_BLACK);
+        drawLuna(xLuna);
+        drawTrava();
+        drawTree();
+        drawMan(xMan, yMan, xLegs);
+        txEnd();
+
+        xLuna += 5;
+        xMan += 2;
+        yMan += 1;
+        txSleep(7);
+    }
+
     yText = 650;
-  while(yText > -400)
-{
+    while(yText > -560)
+    {
        txBegin();
        drawFonText();
        drawText(yText, 35, "Анимационный мультфильм.");
@@ -226,13 +258,17 @@ txCreateWindow (800, 600);
        drawText(yText+250, 25, "В  роли Дыма- Дым Дымов Дымович.");
        drawText(yText+270, 25, "В  роли Текста- Текст Текстов Текстович.");
        drawText(yText+290, 25, "В  роли Какого-то непонятного человека- Какой-то непонятный человек.");
-       drawText(yText+310, 30, "/\ ");
-       drawText(yText+350, 30, "\/ ");
+       drawText(yText+350, 100, "Конец!");
+
 
        txEnd();
        yText -= 5;
        txSleep(10);
  }
+
+
+
 txTextCursor (false);
 return 0;
 }
+
